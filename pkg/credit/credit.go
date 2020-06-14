@@ -1,7 +1,6 @@
 package credit
 
 import (
-	"fmt"
 	"math"
 )
 
@@ -16,8 +15,6 @@ func Calculate(amount int, year int, percent float64) (int64, int64, int64) {
 	total := monthly * months
 
 	over :=  total - amountCents
-
-	fmt.Println(monthlyPercent, denominator)
 
 	return int64(monthly), int64(over), int64(total)
 }
