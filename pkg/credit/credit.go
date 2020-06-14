@@ -4,32 +4,21 @@ import (
 	"math"
 )
 
-func Calculate(amount int, year int, percent float64) (int64, int64, int64) {
-	months := float64(year * 12)
-	amountCents := float64(amount * 100)
-	monthlyPercent := toFixed(percent / 100 / 12, 4)
+func Calculate(amount int64, year int64, percent float64) (monthly, over, total  int64) {
+	months := year * 12
+	amountCents := amount * 100
+	monthlyPercent := percent / 100 / 12
 
-	denominator := math.Pow(1 + monthlyPercent, months) - 1
-	monthly := amountCents * (monthlyPercent + monthlyPercent / denominator)
+	denominator := math.Pow(1 + monthlyPercent, float64(months)) - 1
+	monthly = int64(float64(amountCents) * (monthlyPercent + monthlyPercent / denominator))
 
-	total := monthly * months
+	total = monthly * months
 
-	over :=  total - amountCents
+	over =  total - amountCents
 
-	return int64(monthly), int64(over), int64(total)
+	return
 }
 
-func toFixed(number, point float64) float64 {
-	multy := math.Pow(10,(point + 1))
-	numberInt := int64(number * multy)
-	if numberInt % 10 >= 5 {
-		numberInt = numberInt / 10 + 1
-	} else {
-		numberInt =  numberInt / 10
-	}
-	number = float64(numberInt) / math.Pow(10, point)
-	return number
-}
 
 
 
