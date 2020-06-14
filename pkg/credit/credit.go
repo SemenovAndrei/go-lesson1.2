@@ -24,3 +24,4 @@ func Calculate(amount int64, year int64, percent float64) (monthly, over, total 
 
 
 
+
